@@ -129,8 +129,10 @@ $(TOOLCHAIN)/bin/xtensa-lx106-elf-gcc: crosstool-NG/ct-ng
 	cp -f 1000-mforce-l32.patch crosstool-NG/local-patches/gcc/4.8.5/
 	$(MAKE) -C crosstool-NG -f ../Makefile _toolchain
 
-_toolchain:
+config-ctng:
 	./ct-ng xtensa-lx106-elf
+
+_toolchain:
 	sed -r -i.org s%CT_PREFIX_DIR=.*%CT_PREFIX_DIR="$(TOOLCHAIN)"% .config
 	sed -r -i s%CT_INSTALL_DIR_RO=y%"#"CT_INSTALL_DIR_RO=y% .config
 	cat ../crosstool-config-overrides >> .config
